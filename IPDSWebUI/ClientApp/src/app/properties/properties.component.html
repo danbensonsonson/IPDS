@@ -1,0 +1,95 @@
+<table class="table table-hover table-responsive">
+  <thead>
+    <tr>
+      <th>Property Code</th>
+      <th>Address</th>
+      <th>County</th>
+      <th>Deal Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of service.properties" (click)="onClick(p)">
+      <td>{{p.PropertyCode}}</td>
+      <td>{{p.FullAddress}}</td>
+      <td>{{p.County}}</td>
+      <td>{{p.DealType}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- A Property -->
+<div class="modal" id="propertyDetail" [ngStyle]="{'display':display}" *ngIf="service.property">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Property:&nbsp; {{ this.service.property.PropertyCode }} </h4>
+
+        <button type="button" class="close" data-dismiss="modal" (click)="hideProperty()">&times;</button>
+
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="card-deck">
+          <div class="card">
+            <h4 class="card-header"><small>Property</small><a class="close" [routerLink]="['/properties', this.service.property.PropertyID]"><i class="far fa-edit"></i></a></h4>
+            <table class="table table-borderless table-sm table-responsive">
+              <tr>
+                <td>Address</td>
+                <td>{{ this.service.property.Address }}</td>
+              </tr>
+              <tr>
+                <td>City</td>
+                <td>{{ this.service.property.City }}</td>
+              </tr>
+              <tr>
+                <td>State</td>
+                <td>{{ this.service.property.State }}</td>
+              </tr>
+              <tr>
+                <td>ZipCode</td>
+                <td>{{ this.service.property.ZipCode }}</td>
+              </tr>
+              <tr>
+                <td>County</td>
+                <td>{{ this.service.property.County }}</td>
+              </tr>
+              <tr>
+                <td>Deal Type</td>
+                <td>{{ this.service.property.DealType }}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="card" *ngIf="service.property.Purchase">
+            <h4 class="card-header"><small>Purchase</small></h4>
+            <div class="card-body">
+              <table class="table table-borderless table-sm table-responsive">
+                <tr>
+                  <td>Gross</td>
+                  <td>{{ this.service.property.Purchase.GrossPurchasePrice | number }}</td>
+                </tr>
+                <tr>
+                  <td>Net</td>
+                  <td>{{ this.service.property.Purchase.NetPurchasePrice | number }}</td>
+                </tr>
+                <tr>
+                  <td>Date</td>
+                  <td>{{ this.service.property.Purchase.PurchaseDate | date }}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="goToPropertyDetails('/properties', this.service.property.PropertyID)">Edit</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="hideProperty()">Close</button>
+      </div>
+
+      </div>
+  </div>
+</div>

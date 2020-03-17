@@ -1,0 +1,42 @@
+<form #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit(form.value)">
+  <input type="hidden" name="PropertyID" [value]="service.property.PropertyID" />
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text bg-white">
+          <i class="fas fa-barcode" [class.green-icon]="PropertyCode.valid" [class.red-icon]="PropertyCode.invalid && PropertyCode.touched"></i>
+        </div>
+        <input name="PropertyCode" #PropertyCode="ngModel" [(ngModel)]="service.property.PropertyCode" class="form-control form-control-sm" placeholder="Property Code" required ng-minlength="4" />
+      </div>
+    </div>
+
+  </div>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text bg-white">
+          <i class="fas fa-map-marked-alt" [class.green-icon]="Address.valid" [class.red-icon]="Address.invalid && Address.touched"></i>
+        </div>
+        <input name="Address" #Address="ngModel" [(ngModel)]="service.property.Address" class="form-control form-control-sm" placeholder="Address" required />
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group bg-white">
+          <label for="sel1">Deal Type &nbsp;</label>
+        </div>
+        <select class="form-control form-control-sm" name="DealType" #DealType="ngModel" [(ngModel)]="service.property.DealType" value="{{service.property.DealType}}">
+          <option>Sec</option>
+          <option>Term</option>
+          <option>Warehouse</option>
+          <option>Misc</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-success btn-sm" type="submit" [disabled]="form.invalid"><i class="fas fa-database"></i> Submit</button>
+  </div>
+</form>

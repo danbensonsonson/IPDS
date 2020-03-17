@@ -1,0 +1,12 @@
+<form autocomplete="off" (submit)="onSubmit(searchTerms.value)">
+  <div class="form-group">
+    <div class="input-group">   
+      <div class="input-group bg-white">
+        <input type="text" #searchTerms (keyup)="onSubmit(searchTerms.value)" class="form-control" placeholder="Search">
+        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<app-properties></app-properties>
